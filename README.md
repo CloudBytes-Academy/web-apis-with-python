@@ -21,13 +21,13 @@ https://github.com/UberPython/web-apis-with-python
 
 **Step 2**: Create a Fork of the repository by clicking on the fork button on top right side of the webpage as shown below
 
-![image-20210604203326830](C:\Users\rehan\AppData\Roaming\Typora\typora-user-images\image-20210604203326830.png)
+![image-20210604203326830](https://user-images.githubusercontent.com/4152163/120856800-f96ade80-c59d-11eb-9f8a-7a217dd98767.png)
 
 This will create a copy of the repository in your account. 
 
 **Step 3**: Clone this new repository in your account. To Copy the Git URL press on the Green "Code" button and then click on the clipboard icon as shown below
 
-![image-20210604204305086](C:\Users\rehan\AppData\Roaming\Typora\typora-user-images\image-20210604204305086.png)
+![image-20210604204305086](https://user-images.githubusercontent.com/4152163/120856928-27502300-c59e-11eb-9826-eb7777efe3f2.png)
 
 Or you can run the following command from your terminal with Git installed, replacing "<myUserName>" with our actual GitHub username
 
