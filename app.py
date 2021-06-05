@@ -25,29 +25,31 @@ def dictionary():
     2. Try to find an exact match, and return it if found
     3. If not found, find all approximate matches and return
     """
-    word = request.args.get("word")
+    words = request.args.getlist("word")
 
     # Return an error querystring is malformed
-    if not word:
-        response = {"status": "error", "word": word, "data": "word not found"}
+    if not words:
+        response = {"status": "error", "word": words, "data": "word not found"}
         return jsonify(response)
 
-    # Try to find an exact match
-    definitions = match_exact(word)
-    if definitions:
-        response = {"status": "success", "word": word, "data": definitions}
-        return jsonify(response)
+    # Initialise the reponse
+    response = {"words": []}
 
-    # Try to find an approximate match
-    definitions = match_like(word)
-    if definitions:
-        response = {"status": "partial", "word": word, "data": definitions}
-        return jsonify(response)
-    else:
-        response = {"status": "error", "word": word, "data": "word not found"}
-        return jsonify(response)
+    for word in words:
+        # Try to find an exact match
+        definitions = match_exact(word)
+        if definitions:
+            response["words"].append({"status": "success", "word": word, "data": definitions})
+        else:
+            # Try to find an approximate match
+            definitions = match_like(word)
+            if definitions:
+                response["words"].append({"status": "partial", "word": word, "data": definitions})
+            else:
+                response[words].append({"status": "error", "word": word, "data": "word not found"})
 
-    return "TODO"
+    # Return the response after processing all words
+    return jsonify(response)
 
 
 if __name__ == "__main__":
