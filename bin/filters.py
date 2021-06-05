@@ -12,4 +12,11 @@ def apply_filter(file: object, filter: str) -> object:
     5. Return the file object
     """
 
-    pass
+    image = Image.open(file)
+    image = image.filter(eval(f"ImageFilter.{filter.upper()}"))
+
+    file = io.BytesIO()
+    image.save(file, "JPEG")
+    file.seek(0)
+
+    return file
