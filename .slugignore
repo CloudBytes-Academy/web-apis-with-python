@@ -3,3 +3,4 @@ Dockerfile
 LICENSE
 .dockerignore
 .devcontainer
+sample.jpg
