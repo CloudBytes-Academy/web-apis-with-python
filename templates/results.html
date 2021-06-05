@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png"
+        type="image/x-icon">
+    <title>Goggle</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+
+<body>
+    <ul>
+        {% for word in response.json.words %}
+        <li>
+            {{word.word}}: Match found? {{word.status}}
+            {% if word.status != 'error' %}
+            <ul>
+                {% for definition in word.data %}
+                <li>
+                    {{definition[0]}}, {{definition[1]}}: {{definition[2]}}
+                </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+</body>
