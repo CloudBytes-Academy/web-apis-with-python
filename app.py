@@ -1,55 +1,33 @@
-# dictionary-api-python-flask/app.py
-from flask import Flask, request, jsonify, render_template
-from model.dbHandler import match_exact, match_like
+from flask import Flask, request, send_file, jsonify
+from bin.filters import apply_filter
 
 app = Flask(__name__)
 
+# Read the PIL document to find out which filters are available out-of the box
+filters_available = []
 
-@app.get("/")
+
+@app.route("/", methods=["GET", "POST"])
 def index():
     """
-    DEFAULT ROUTE
-    This method will
-    1. Provide usage instructions formatted as JSON
+    TODO:
+    1. Return the usage instructions that specifies which filters are available, and the method format
     """
-    # response = {"usage": "/dict?=<word>"}
-    # Since this is a website with front-end, we don't need to send the usage instructions
-    return render_template("index.html")
+    pass
 
 
-@app.get("/dict")
-def dictionary():
+@app.post("/<filter>")
+def image_filter(filter):
     """
-    DEFAULT ROUTE
-    This method will
-    1. Accept a word from the request
-    2. Try to find an exact match, and return it if found
-    3. If not found, find all approximate matches and return
+    TODO:
+    1. Checks if the provided filter is available, if not, return an error
+    2. Check if a file has been provided in the POST request, if not return an error
+    3. Apply the filter using apply_filter() method from bin.filters
+    4. Return the filtered image as response
     """
-    words = request.args.getlist("word")
+    pass
 
-    if not words:
-        response = {"status": "error", "word": words, "data": "word not found"}
-        return jsonify(response)
-
-    # Initialise the reponse
-    response = {"words": []}
-
-    for word in words:
-        # Try to find an exact match
-        definitions = match_exact(word)
-        if definitions:
-            response["words"].append({"status": "success", "word": word, "data": definitions})
-        else:
-            # Try to find an approximate match
-            definitions = match_like(word)
-            if definitions:
-                response["words"].append({"status": "partial", "word": word, "data": definitions})
-            else:
-                response[words].append({"status": "error", "word": word, "data": "word not found"})
-
-    # Render the results.html template and return along with response after processing all words
-    return render_template("results.html", response=jsonify(response))
 
 if __name__ == "__main__":
     app.run()
+    
