@@ -47,7 +47,6 @@ def dictionary():
         response = {"status": "error", "word": word, "data": "word not found"}
         return jsonify(response)
 
-    return "TODO"
 
 
 if __name__ == "__main__":
