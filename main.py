@@ -18,28 +18,32 @@ def index():
 
 
 @app.get("/dict")
-def dictionary(word: str):
+def dictionary(words: List[str] = Query(None)):
     """
-    DEFAULT ROUTE
+    DICTIONARY ROUTE
     This method will
     1. Accept a word from the request
     2. Try to find an exact match, and return it if found
     3. If not found, find all approximate matches and return
     """
-    if not word:
-        response = {"status": "error", "word": word, "data": "word not found"}
+    if not words:
+        response = {"status": "error", "word": words, "data": "word not found"}
         return jsonable_encoder(response)
 
-    definitions = match_exact(word)
-    if definitions:
-        response = {"status": "success", "word": word, "data": definitions}
-        return jsonable_encoder(response)
+    # Initialise the reponse
+    response = {"words": []}
 
-    # Try to find an approximate match
-    definitions = match_like(word)
-    if definitions:
-        response = {"status": "partial", "word": word, "data": definitions}
-        return jsonable_encoder(response)
-    else:
-        response = {"status": "error", "word": word, "data": "word not found"}
-        return jsonable_encoder(response)
+    for word in words:
+        # Try to find an exact match
+        definitions = match_exact(word)
+        if definitions:
+            response["words"].append({"status": "success", "word": word, "data": definitions})
+        else:
+            # Try to find an approximate match
+            definitions = match_like(word)
+            if definitions:
+                response["words"].append({"status": "partial", "word": word, "data": definitions})
+            else:
+                response[words].append({"status": "error", "word": word, "data": "word not found"})
+
+    return jsonable_encoder(response)
