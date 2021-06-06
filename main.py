@@ -1,45 +1,34 @@
 from typing import List, Optional
 from fastapi import FastAPI, Query
 from fastapi.encoders import jsonable_encoder
-from model.dbHandler import match_exact, match_like
+
 
 app = FastAPI()
 
+# Read the PIL document to find out which filters are available out-of the box
+filters_available = [
+    "blur",
+    "contour",
+    "detail",
+    "edge_enhance",
+    "edge_enhance_more",
+    "emboss",
+    "find_edges",
+    "sharpen",
+    "smooth",
+    "smooth_more",
+]
 
-@app.get("/")
+
+@app.api_route("/", methods=["GET", "POST"])
 def index():
     """
-    DEFAULT ROUTE
-    This method will
-    1. Provide usage instructions formatted as JSON
+    Return the usage instructions that specifies
+    1. which filters are available, and
+    2. the method format
     """
-    response = {"usage": "/dict?=<word>"}
+    response = {
+        "filters_available": filters_available,
+        "usage": {"http_method": "POST", "URL": "/<filter_available>/"},
+    }
     return jsonable_encoder(response)
-
-
-@app.get("/dict")
-def dictionary(word: str):
-    """
-    DEFAULT ROUTE
-    This method will
-    1. Accept a word from the request
-    2. Try to find an exact match, and return it if found
-    3. If not found, find all approximate matches and return
-    """
-    if not word:
-        response = {"status": "error", "word": word, "data": "word not found"}
-        return jsonable_encoder(response)
-
-    definitions = match_exact(word)
-    if definitions:
-        response = {"status": "success", "word": word, "data": definitions}
-        return jsonable_encoder(response)
-
-    # Try to find an approximate match
-    definitions = match_like(word)
-    if definitions:
-        response = {"status": "partial", "word": word, "data": definitions}
-        return jsonable_encoder(response)
-    else:
-        response = {"status": "error", "word": word, "data": "word not found"}
-        return jsonable_encoder(response)
