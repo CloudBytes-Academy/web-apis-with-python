@@ -13,7 +13,7 @@ If you are unfamiliar with Git and GitHub, please read the instructions on usage
 
 ### 1. Fork to create your own copy of the repository
 
-**Step 1**: Login to [GitHub](https://github.com) and navigate to [this repository](https://github.com/UberPython/web-apis-with-python)
+**Step 1**: Login to [GitHub](https://github.com) and navigate to [this repository](https://github.com/CloudBytesDotDev/web-apis-with-python)
 
 ```http
 https://github.com/UberPython/web-apis-with-python
