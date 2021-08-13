@@ -1,3 +1,5 @@
+> For help and support open a topic in [Discussions](https://github.com/CloudBytesDotDev/web-apis-with-python/discussions) above.
+
 # Starter Kit: Web APIs with Python
 
 This is the starter kit associate with "Building Web APIs with Python" which the following version available
