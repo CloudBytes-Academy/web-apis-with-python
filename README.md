@@ -2,8 +2,7 @@
 
 This is the starter kit associate with "Building Web APIs with Python" which the following version available
 
-1. Kindle: 
-2. Udemy:
+1. Kindle Edition: [Get it here](https://kdp.amazon.com/amazon-dp-action/us/dualbookshelf.marketplacelink/B09BJLKM6F)
 
 ## Usage Instructions
 
