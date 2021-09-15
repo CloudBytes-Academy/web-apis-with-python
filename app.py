@@ -14,4 +14,13 @@ def index():
     4. If first name is provided byt second name is not provided: respond with "Hello, <first-name>!"
     5. If both names are provided: respond with a question, "Is your name <fist-name> <second-name>
     """
-    return jsonify("TODO")
+    fname = request.args.get("fname")
+    lname = request.args.get("lname")
+    if not fname and not lname:
+        return jsonify({"status" : "error"})
+    elif fname and not lname:
+        return jsonify({"data" : f'Hello, {fname}!'})
+    elif not fname and lname:
+        return jsonify({"data" : f'Hello, Mr.{lname}!'})
+    else:
+        return jsonify({"data" : f'Is your name {fname} {lname}?'})
