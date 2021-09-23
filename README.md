@@ -17,7 +17,7 @@ If you are unfamiliar with Git and GitHub, please read the instructions on usage
 **Step 1**: Login to [GitHub](https://github.com) and navigate to [this repository](https://github.com/CloudBytesDotDev/web-apis-with-python)
 
 ```http
-https://github.com/UberPython/web-apis-with-python
+https://github.com/CloudBytesDotDev/web-apis-with-python
 ```
 
 **Step 2**: Create a Fork of the repository by clicking on the fork button on top right side of the webpage as shown below
