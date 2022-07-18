@@ -14,7 +14,7 @@ def index():
     """
     response = {"usage": "/dict?=<word>"}
     # Since this is a website with front-end, we don't need to send the usage instructions
-    return jsonify(response)
+    return render_template("index.html", response=jsonify(response))
 
 
 @app.get("/dict")
@@ -26,18 +26,36 @@ def dictionary():
     2. Try to find an exact match, and return it if found
     3. If not found, find all approximate matches and return
     """
-    word = request.args.get("word")
-    if not word:
-        return jsonify({"status": "error", "data": "No a valid word or no word provided."})
-    definition = match_exact(word)
-    if definition:
-        return jsonify({"status": "success", "data": definition})
+    words = request.args.getlist("word")
+    response = {"words": []}
+    if not words:
+        response =  { "status": "error" , "word": words, "data": "word not found" }
+        return response
 
-    definition = match_like(word)
-    if definition:
-        return jsonify({"status": "partial", "data": definition})
+    for word in words:
+        definitions = match_exact(word)
+        if definitions:
+            response["words"].append({
+                "status": "success",
+                "word": word,
+                "data": definitions
+            })
+        else:
+            definitions = match_like(word)
+            if definitions:
+                response["words"].append({
+                    "status": "partial",
+                    "word": word,
+                    "data": definitions
+                })
+            else:
+                response["words"].append({
+                    "status": "error",
+                    "word": word,
+                    "data": "No a valid word or no word provided."
+                })
+    return render_template("results.html", response=jsonify(response))
 
-    return jsonify({"status": "error", "data": "word not found"})
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
