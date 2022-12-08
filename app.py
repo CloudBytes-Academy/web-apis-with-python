@@ -14,13 +14,16 @@ def index():
     4. If first name is provided byt second name is not provided: respond with "Hello, <first-name>!"
     5. If both names are provided: respond with a question, "Is your name <fist-name> <second-name>
     """
-    name = input("Tell me your first name:")
-    surname = input("Tell me your second name:")
-    if name == '' and surname == '':
-        return "Please, provide first and last name" # ValueError: invalid
-    elif name == '':
-        return "Hello Mr {}!".format(surname)
-    elif surname == '':
-        return "Hello, {}!".format(name)
+    name = request.args.get("name")
+    surname = request.args.get("surname")
+    
+    if not name and not surname:
+        response = {"status" : "error"}
+    elif name and not surname:
+        response = {"data" : f"Hello, {name} !"}
+    elif not name and surname:
+        response = {"data" : f"Hello, Mr {surname} !"}
     else:
-        return "Is your name {} {}".format(name, surname)
+        response = {"data" : f"Is yor name {name} {surname} ?"}
+
+    return jsonify(response)
