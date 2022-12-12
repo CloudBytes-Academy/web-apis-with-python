@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+{% block title %}Hello API Flask{% endblock %}
+    </head>
+    <body>
+
+{% block content %}
+<form action="{{ url_for("greet")}}" method="post">
+	<p>First Name:</p>
+	<p><input type="text" id="name" name="name" /></p>
+    <p>Second Name:</p>
+	<p><input type="text" id="surname" name="surname" /></p>
+	<p><input type="submit" value="submit"/></p>
+</form>
+{% endblock %}
+
+    </body>
+</html>
