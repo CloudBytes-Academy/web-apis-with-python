@@ -12,9 +12,9 @@ def index():
     This method will
     1. Provide usage instructions formatted as JSON
     """
-    response = {"usage":"/dict?=<word>"}
+    # args = request.args.get("word")
     # Since this is a website with front-end, we don't need to send the usage instructions
-    return jsonify(response)
+    return render_template("index.html")
 
 
 @app.get("/dict")
@@ -45,7 +45,7 @@ def dictionary():
             else:
                 response["words"].append({"status":"error","word":word,"data":"word not found"})
 
-    return jsonify(response)
+    return render_template("results.html", response=jsonify(response))
 
 if __name__ == "__main__":
     app.run()
