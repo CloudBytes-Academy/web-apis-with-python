@@ -1,9 +1,10 @@
+> For help and support open a topic in [Discussions](https://github.com/CloudBytesDotDev/web-apis-with-python/discussions) above.
+
 # Starter Kit: Web APIs with Python
 
 This is the starter kit associate with "Building Web APIs with Python" which the following version available
 
-1. Kindle: 
-2. Udemy:
+1. Kindle Edition: [Get it here](https://kdp.amazon.com/amazon-dp-action/us/dualbookshelf.marketplacelink/B09BJLKM6F)
 
 ## Usage Instructions
 
@@ -13,10 +14,10 @@ If you are unfamiliar with Git and GitHub, please read the instructions on usage
 
 ### 1. Fork to create your own copy of the repository
 
-**Step 1**: Login to [GitHub](https://github.com) and navigate to [this repository](https://github.com/UberPython/web-apis-with-python)
+**Step 1**: Login to [GitHub](https://github.com) and navigate to [this repository](https://github.com/CloudBytesDotDev/web-apis-with-python)
 
 ```http
-https://github.com/UberPython/web-apis-with-python
+https://github.com/CloudBytesDotDev/web-apis-with-python
 ```
 
 **Step 2**: Create a Fork of the repository by clicking on the fork button on top right side of the webpage as shown below
