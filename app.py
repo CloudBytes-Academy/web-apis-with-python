@@ -1,4 +1,7 @@
 from flask import Flask, jsonify, request
+import logging
+
+logging.basicConfig(filename='record.log', level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(threadName)s : %(message)s')
 
 # Intitialise the app
 app = Flask(__name__)
@@ -30,4 +33,5 @@ def index():
         # if none of the above is true, then both names must be present
         response = { "data" : f"Is your name {fname} {lname}?" }
 
+    app.logger.info(f"User's response: {response}")
     return jsonify(response)
