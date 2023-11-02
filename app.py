@@ -1,22 +1,20 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request, render_template, redirect
 
 app = Flask(__name__)
 
 ERROR_MESSAGE = {"status": "error"}
+GOOGLE_API_ENDPOINT = "https://google.com/search"
 
-
-@app.get("/greet")
+@app.get("/")
 def index():
 
-    firstname, lastname = request.args.get("firstname"), request.args.get("lastname")
+    return render_template("index.html")
 
-    if firstname and (not lastname):
-        response = {"data": f"Hello, {firstname}!"}
-    elif (not firstname) and lastname:
-        response = {"data": f"Hello, Mr. or Ms. {lastname}!"}
-    elif firstname and lastname:
-        response = {"data": f"Is your name {firstname} {lastname}?"}
-    else:
-        return jsonify(ERROR_MESSAGE)
+@app.get("/search")
+def search():
+    query = request.args.get("q")
+    return redirect(f"{GOOGLE_API_ENDPOINT}?q={query}")
 
-    return jsonify(response)
+if __name__ == "__main__":
+
+    app.run()
